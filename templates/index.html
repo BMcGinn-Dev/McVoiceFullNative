@@ -5,17 +5,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Photo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .loading {
+            display: none;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 4px solid #ccc;
+            border-top: 4px solid #007BFF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 
 <body>
     <h1>Upload a Photo</h1>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
+    <form action="/upload" method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
         <input type="file" name="file" accept="image/*" required>
         <button type="submit">Upload</button>
     </form>
 
-    <h1>Validation Code</h1>
-    <p>The validation code is: {{ val_code }}</p>
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        Photo uploaded. Completing survey...
+    </div>
+
+    <div class="validation">
+        <h1>Validation Code</h1>
+        <p>The validation code is: <strong style="color: darkgreen; font-size: 24px;">{{ val_code }}</strong></p>
+        <p>Give this code to the McDonald's employee when ordering to get a BOGO any sandwich equal or lesser value!</p>
+
+        <form action="/clear" method="POST" style="margin-top: 20px;">
+            <button type="submit">Clear Files and Return to Home</button>
+        </form>
+    </div>
+
+    <script>
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+        }
+    </script>
 </body>
 
 </html>

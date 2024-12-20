@@ -1,0 +1,16 @@
+blinker
+boto3
+botocore
+easyOCR
+urllib3
+requests
+beautifulsoup4
+selenium
+pyautogui
+webdriver_manager
+GPUtil
+numpy
+icecream
+tqdm
+flask
+shutil
